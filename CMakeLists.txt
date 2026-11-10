@@ -1,64 +1,71 @@
-# Set the minimum version of CMake that can be used
 cmake_minimum_required(VERSION 3.20)
 
-# Enable compile command to ease indexing with e.g. clangd
-set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
-set(CMAKE_C_COMPILER_FORCED TRUE)
-set(CMAKE_CXX_COMPILER_FORCED TRUE)
+# Set target system and processor BEFORE project()
+set(CMAKE_SYSTEM_NAME Generic)
+set(CMAKE_SYSTEM_PROCESSOR arm)
+set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 
-# Set target definition variables required by the toolchain file
-include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/target.cmake)
+# Explicitly clear any Apple host architecture flags
+set(CMAKE_OSX_ARCHITECTURES "")
 
-# Set the toolchain file for cross-compilation
-include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/gcc-arm-none-eabi.cmake)
+# Specify toolchain
+set(CMAKE_C_COMPILER arm-none-eabi-gcc)
+set(CMAKE_ASM_COMPILER arm-none-eabi-gcc)
 
-# Project definition
-project(cmsis)
+# Project definition must come AFTER setting CMAKE_SYSTEM_NAME
+project(cmsis C ASM)
 
-# Enable CMake support for ASM and C/CPP languages
-enable_language(C CXX ASM)
-
-set(PROJECT_NAME cmsis)
-
-# Create an executable object type
-add_executable(${PROJECT_NAME})
-
-# Include additional CMake files for flags, components, and files
-include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/flags.cmake)
-include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/components.cmake)
-include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/files.cmake)
-
-# Add sources to executable/library
-target_sources(${PROJECT_NAME} PRIVATE
-  # User defined sources
+# 3. Target executable
+add_executable(${PROJECT_NAME}
+    Src/main.c
+    Drivers/CMSIS/Device/ST/STM32G4xx/Source/system_stm32g4xx.c
+    Drivers/CMSIS/Device/ST/STM32G4xx/Source/startup_stm32g474xx.s
 )
 
-# Add include directories
+# 4. Include paths
 target_include_directories(${PROJECT_NAME} PRIVATE
-  # User defined include directories
+    Inc
+    Drivers/CMSIS/Include
+    Drivers/CMSIS/Device/ST/STM32G4xx/Include
 )
 
-# Compiler options
-target_compile_options(${PROJECT_NAME} PRIVATE
-  # User defined compiler options
-)
-
-# Add additional defined symbols
+# 5. Device definitions
 target_compile_definitions(${PROJECT_NAME} PRIVATE
-  # Add additional defined symbols here
+    STM32G474xx
 )
 
-# Linker options
-target_link_options(${PROJECT_NAME} PRIVATE 
-  # User defined linker options
+# 6. Target MCU flags (Cortex-M4 + Hardware Single-Precision FPU)
+set(MCU_FLAGS
+    -mcpu=cortex-m4
+    -mthumb
+    -mfpu=fpv4-sp-d16
+    -mfloat-abi=hard
 )
 
-# Add additional linker search directories
-target_link_directories(${PROJECT_NAME} PRIVATE
-  # Add additional linker search directories here
+target_compile_options(${PROJECT_NAME} PRIVATE
+    ${MCU_FLAGS}
+    -Wall
+    -Wextra
+    -fdata-sections
+    -ffunction-sections
+    $<$<CONFIG:Debug>:-g3 -O0>
+    $<$<CONFIG:Release>:-O2>
 )
 
-# Add additional linker libraries
-target_link_libraries(${PROJECT_NAME} PRIVATE
-  # Add additional linker libraries here
+# 7. Linker settings
+target_link_options(${PROJECT_NAME} PRIVATE
+    ${MCU_FLAGS}
+    -T${CMAKE_CURRENT_SOURCE_DIR}/stm32g474xe_flash.ld
+    -Wl,-Map=${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.map
+    -Wl,--gc-sections
+    -Wl,--print-memory-usage
+    --specs=nano.specs
+    --specs=nosys.specs
+)
+
+# 8. Post-build HEX and BIN generation
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND arm-none-eabi-objcopy -O ihex $<TARGET_FILE:${PROJECT_NAME}> ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.hex
+    COMMAND arm-none-eabi-objcopy -O binary $<TARGET_FILE:${PROJECT_NAME}> ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.bin
+    COMMENT "Generating HEX and BIN"
 )

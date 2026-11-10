@@ -1,0 +1,20 @@
+[
+{
+  "directory": "/Users/chrisfonseca/Documents/PlatformIO/Projects/stradella_controller/cmsis/build",
+  "command": "/opt/homebrew/bin/arm-none-eabi-gcc -DSTM32G474xx -I/Users/chrisfonseca/Documents/PlatformIO/Projects/stradella_controller/cmsis/Inc -I/Users/chrisfonseca/Documents/PlatformIO/Projects/stradella_controller/cmsis/Drivers/CMSIS/Include -I/Users/chrisfonseca/Documents/PlatformIO/Projects/stradella_controller/cmsis/Drivers/CMSIS/Device/ST/STM32G4xx/Include -g -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=hard -Wall -Wextra -fdata-sections -ffunction-sections -g3 -O0 -o CMakeFiles/cmsis.dir/Src/main.c.obj -c /Users/chrisfonseca/Documents/PlatformIO/Projects/stradella_controller/cmsis/Src/main.c",
+  "file": "/Users/chrisfonseca/Documents/PlatformIO/Projects/stradella_controller/cmsis/Src/main.c",
+  "output": "/Users/chrisfonseca/Documents/PlatformIO/Projects/stradella_controller/cmsis/build/CMakeFiles/cmsis.dir/Src/main.c.obj"
+},
+{
+  "directory": "/Users/chrisfonseca/Documents/PlatformIO/Projects/stradella_controller/cmsis/build",
+  "command": "/opt/homebrew/bin/arm-none-eabi-gcc -DSTM32G474xx -I/Users/chrisfonseca/Documents/PlatformIO/Projects/stradella_controller/cmsis/Inc -I/Users/chrisfonseca/Documents/PlatformIO/Projects/stradella_controller/cmsis/Drivers/CMSIS/Include -I/Users/chrisfonseca/Documents/PlatformIO/Projects/stradella_controller/cmsis/Drivers/CMSIS/Device/ST/STM32G4xx/Include -g -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=hard -Wall -Wextra -fdata-sections -ffunction-sections -g3 -O0 -o CMakeFiles/cmsis.dir/Drivers/CMSIS/Device/ST/STM32G4xx/Source/system_stm32g4xx.c.obj -c /Users/chrisfonseca/Documents/PlatformIO/Projects/stradella_controller/cmsis/Drivers/CMSIS/Device/ST/STM32G4xx/Source/system_stm32g4xx.c",
+  "file": "/Users/chrisfonseca/Documents/PlatformIO/Projects/stradella_controller/cmsis/Drivers/CMSIS/Device/ST/STM32G4xx/Source/system_stm32g4xx.c",
+  "output": "/Users/chrisfonseca/Documents/PlatformIO/Projects/stradella_controller/cmsis/build/CMakeFiles/cmsis.dir/Drivers/CMSIS/Device/ST/STM32G4xx/Source/system_stm32g4xx.c.obj"
+},
+{
+  "directory": "/Users/chrisfonseca/Documents/PlatformIO/Projects/stradella_controller/cmsis/build",
+  "command": "/opt/homebrew/bin/arm-none-eabi-gcc -DSTM32G474xx -I/Users/chrisfonseca/Documents/PlatformIO/Projects/stradella_controller/cmsis/Inc -I/Users/chrisfonseca/Documents/PlatformIO/Projects/stradella_controller/cmsis/Drivers/CMSIS/Include -I/Users/chrisfonseca/Documents/PlatformIO/Projects/stradella_controller/cmsis/Drivers/CMSIS/Device/ST/STM32G4xx/Include -g -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=hard -Wall -Wextra -fdata-sections -ffunction-sections -g3 -O0 -o CMakeFiles/cmsis.dir/Drivers/CMSIS/Device/ST/STM32G4xx/Source/startup_stm32g474xx.s.obj -c /Users/chrisfonseca/Documents/PlatformIO/Projects/stradella_controller/cmsis/Drivers/CMSIS/Device/ST/STM32G4xx/Source/startup_stm32g474xx.s",
+  "file": "/Users/chrisfonseca/Documents/PlatformIO/Projects/stradella_controller/cmsis/Drivers/CMSIS/Device/ST/STM32G4xx/Source/startup_stm32g474xx.s",
+  "output": "/Users/chrisfonseca/Documents/PlatformIO/Projects/stradella_controller/cmsis/build/CMakeFiles/cmsis.dir/Drivers/CMSIS/Device/ST/STM32G4xx/Source/startup_stm32g474xx.s.obj"
+}
+]

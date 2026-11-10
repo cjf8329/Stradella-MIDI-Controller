@@ -1,0 +1,9 @@
+# ninja log v7
+2	9	1794352035868133577	clean	3fc57fb2423cde30
+1	209	1794352056761937401	CMakeFiles/cmsis.dir/Src/main.c.obj	4e37a04d43ac0b46
+1	217	1794352056762323307	CMakeFiles/cmsis.dir/Drivers/CMSIS/Device/ST/STM32G4xx/Source/system_stm32g4xx.c.obj	9cb43bb8678acb77
+2	17	1794352230123823134	clean	7eb198a2a14a776
+1	26	1794352230200493199	CMakeFiles/cmsis.dir/Drivers/CMSIS/Device/ST/STM32G4xx/Source/startup_stm32g474xx.s.obj	2139bdda1fd3cf28
+1	173	1794352230199803051	CMakeFiles/cmsis.dir/Src/main.c.obj	4e37a04d43ac0b46
+1	177	1794352230200304787	CMakeFiles/cmsis.dir/Drivers/CMSIS/Device/ST/STM32G4xx/Source/system_stm32g4xx.c.obj	9cb43bb8678acb77
+177	231	1794352230376350670	cmsis	6fe0c88fd219d1d0
