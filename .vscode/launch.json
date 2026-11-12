@@ -1,0 +1,25 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+    "name": "Debug MCU",
+    "type": "cortex-debug",
+    "request": "launch",
+    "servertype": "openocd",
+    "serverpath": "C:/ST/STM32CubeIDE_1.18.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.openocd.win32_2.4.500.202604080855/tools/bin/openocd.exe",
+    "searchDir": [
+        "C:/ST/STM32CubeIDE_1.18.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.debug.openocd_2.3.400.202606220929/resources/openocd/st_scripts"
+    ],
+    "cwd": "${workspaceFolder}",
+    "executable": "${workspaceFolder}/build/Debug/cmsis",
+    "device": "STM32G474RE",
+    "configFiles": [
+        "interface/stlink-dap.cfg",
+        "target/stm32g4x.cfg"
+    ],
+    "svdFile": "${workspaceFolder}/STM32G474.svd",
+    "runToEntryPoint": "main",
+    "showDevDebugOutput": "raw"
+    }
+  ]
+}

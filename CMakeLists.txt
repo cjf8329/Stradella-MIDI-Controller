@@ -18,6 +18,9 @@ project(cmsis C ASM)
 # 3. Target executable
 add_executable(${PROJECT_NAME}
     Src/main.c
+    Src/clock.c
+    Src/led.c
+    Src/systick.c
     Drivers/CMSIS/Device/ST/STM32G4xx/Source/system_stm32g4xx.c
     Drivers/CMSIS/Device/ST/STM32G4xx/Source/startup_stm32g474xx.s
 )

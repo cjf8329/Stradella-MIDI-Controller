@@ -1,3 +1,0 @@
-/Users/chrisfonseca/Documents/PlatformIO/Projects/stradella_controller/cmsis/build/Debug/CMakeFiles/cmsis.dir
-/Users/chrisfonseca/Documents/PlatformIO/Projects/stradella_controller/cmsis/build/Debug/CMakeFiles/edit_cache.dir
-/Users/chrisfonseca/Documents/PlatformIO/Projects/stradella_controller/cmsis/build/Debug/CMakeFiles/rebuild_cache.dir
