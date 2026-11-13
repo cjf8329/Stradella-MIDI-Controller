@@ -21,6 +21,7 @@ add_executable(${PROJECT_NAME}
     Src/clock.c
     Src/led.c
     Src/systick.c
+    Src/lpuart.c
     Drivers/CMSIS/Device/ST/STM32G4xx/Source/system_stm32g4xx.c
     Drivers/CMSIS/Device/ST/STM32G4xx/Source/startup_stm32g474xx.s
 )

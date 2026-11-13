@@ -19,5 +19,5 @@
     "editor.tabSize": 4,
     "editor.formatOnSave": true,
     "editor.detectIndentation": false,
-    "cortex-debug.variableUseNaturalFormat": true
+    "cortex-debug.variableUseNaturalFormat": false
 }

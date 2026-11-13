@@ -1,5 +1,4 @@
 #include "clock.h"
-#include "stm32g474xx.h"
 #include "stm32g4xx.h"
 
 #define WAIT_LOOPS 100000U
