@@ -11,10 +11,6 @@ void systick_init(void) {
     }
 }
 
-uint32_t systick_ms(void) {
-    return s_ms;
-}
+uint32_t systick_ms(void) { return s_ms; }
 
-void SysTick_Handler(void) {
-    s_ms++;
-}
+void SysTick_Handler(void) { s_ms++; }

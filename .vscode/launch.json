@@ -19,7 +19,8 @@
     ],
     "svdFile": "${workspaceFolder}/STM32G474.svd",
     "runToEntryPoint": "main",
-    "showDevDebugOutput": "raw"
+    "showDevDebugOutput": "raw",
+    "preLaunchTask": "CMake: build"
     }
   ]
 }

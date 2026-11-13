@@ -2,6 +2,6 @@
 #define CLOCK_H
 #include <stdint.h>
 
-void clock_init(void);
+bool clock_init(void);
 
 #endif /* CLOCK_H */
