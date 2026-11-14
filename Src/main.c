@@ -10,8 +10,9 @@ int main(void) {
     systick_init();
     // led_init();
     lpuart_init(115200UL);
+    mux_init();
 
     for (;;) {
-        lpuart1_write_byte('A');
+        uint16_t val = mux_read_raw();
     }
 }
