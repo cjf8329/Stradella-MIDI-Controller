@@ -1,6 +1,8 @@
 #include "mux.h"
 #include "stm32g474xx.h"
 #include "stm32g4xx.h"
+#include "system_stm32g4xx.h"
+#include <stddef.h>
 
 typedef struct {
     GPIO_TypeDef *port;
@@ -16,11 +18,12 @@ typedef struct {
 // PA1 ADC12_IN2
 // PA0 ADC12_IN1
 // PC3 ADC12_IN9
-static const mux_ch_cfg_t mux_cfg[] = {{GPIOB, 0, 15}/*,  {GPIOB, 1, 12}, {GPIOB, 11, 14},
+static const mux_ch_cfg_t mux_cfg[] = {{GPIOB, 0, 15},  {GPIOB, 1, 12}, {GPIOB, 11, 14},
                                        {GPIOB, 12, 11}, {GPIOB, 14, 5}, {GPIOA, 1, 2},
-                                       {GPIOA, 0, 1},   {GPIOC, 3, 9}*/};
+                                       {GPIOA, 0, 1},   {GPIOC, 3, 9}};
 
 #define NUM_MUXES (sizeof(mux_cfg) / sizeof(mux_cfg[0]))
+const uint8_t MUX_COUNT = NUM_MUXES;
 
 static volatile uint16_t adc_buf[NUM_MUXES];
 
@@ -59,7 +62,7 @@ static void adc_set_sqr(ADC_TypeDef *adc, uint8_t mux_id, uint8_t ch) {
     *sqr = (*sqr & ~(0x1FU << pos)) | ((uint32_t)ch << pos);
 }
 
-bool mux_init(void) {
+uint8_t mux_init(void) {
     // Enable GPIOABC, ADC1
     RCC->AHB2ENR |=
         RCC_AHB2ENR_GPIOBEN | RCC_AHB2ENR_GPIOAEN | RCC_AHB2ENR_GPIOCEN | RCC_AHB2ENR_ADC12EN;
@@ -123,7 +126,7 @@ bool mux_init(void) {
     while (!(ADC1->ISR & ADC_ISR_ADRDY)) {
     };
 
-    return true;
+    return MUX_COUNT;
 }
 
 uint16_t mux_read_raw(void) {
@@ -131,4 +134,29 @@ uint16_t mux_read_raw(void) {
     while (!(ADC1->ISR & ADC_ISR_EOC)) {
     };
     return (uint16_t)ADC1->DR; // reading DR clears EOC
+}
+
+// >340 cycles at 170 MHz for 2 microsecond delay
+void mux_settle_delay() {
+    for (size_t i = 0; i < 340; i++) {
+    }
+}
+
+void mux_scan_all(uint16_t out[][MUX_CH_PER]) {
+    for (uint8_t ch = 0; ch < MUX_CH_PER; ch++) {
+        mux_set_channel(ch);
+        mux_settle_delay();
+
+        // transfer complete flag
+        DMA1->IFCR = DMA_IFCR_CTCIF1;
+
+        // start adc, wait for transfer to complete
+        ADC1->CR |= ADC_CR_ADSTART;
+        while (!(DMA1->ISR & DMA_ISR_TCIF1)) {
+        }
+
+        for (uint8_t m = 0U; m < NUM_MUXES; m++) {
+            out[m][ch] = adc_buf[m];
+        }
+    }
 }
