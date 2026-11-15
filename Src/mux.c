@@ -136,9 +136,9 @@ uint16_t mux_read_raw(void) {
     return (uint16_t)ADC1->DR; // reading DR clears EOC
 }
 
-// >340 cycles at 170 MHz for 2 microsecond delay
+// >3400 cycles at 170 MHz for 20 microsecond delay
 void mux_settle_delay() {
-    for (size_t i = 0; i < 340; i++) {
+    for (size_t i = 0; i < 3400; i++) {
     }
 }
 

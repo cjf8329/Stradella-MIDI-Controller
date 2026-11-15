@@ -11,7 +11,7 @@ uint16_t mux_read_raw(void);
 
 // Update s0-3 simultaneously
 static inline void mux_set_channel(uint8_t ch) {
-    // clear and set new address
+    // clear and set new address (PB6-9)
     GPIOB->BSRR = (0x0FU << (16 + 6) | ((ch & 0xFU) << 6));
 }
 
