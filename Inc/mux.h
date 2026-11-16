@@ -7,7 +7,6 @@
 extern const uint8_t MUX_COUNT;
 
 uint8_t mux_init(void);
-uint16_t mux_read_raw(void);
 
 // Update s0-3 simultaneously
 static inline void mux_set_channel(uint8_t ch) {

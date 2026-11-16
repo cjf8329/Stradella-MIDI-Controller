@@ -19,8 +19,8 @@ typedef struct {
 // PA0 ADC12_IN1
 // PC3 ADC12_IN9
 static const mux_ch_cfg_t mux_cfg[] = {{GPIOB, 0, 15},  {GPIOB, 1, 12}, {GPIOB, 11, 14},
-                                       {GPIOB, 12, 11}, {GPIOB, 14, 5}, {GPIOA, 1, 2},
-                                       {GPIOA, 0, 1},   {GPIOC, 3, 9}};
+                                       {GPIOB, 12, 11}/*, {GPIOB, 14, 5}, {GPIOA, 1, 2},
+                                       {GPIOA, 0, 1},   {GPIOC, 3, 9}*/};
 
 #define NUM_MUXES (sizeof(mux_cfg) / sizeof(mux_cfg[0]))
 const uint8_t MUX_COUNT = NUM_MUXES;
@@ -129,16 +129,9 @@ uint8_t mux_init(void) {
     return MUX_COUNT;
 }
 
-uint16_t mux_read_raw(void) {
-    ADC1->CR |= ADC_CR_ADSTART;
-    while (!(ADC1->ISR & ADC_ISR_EOC)) {
-    };
-    return (uint16_t)ADC1->DR; // reading DR clears EOC
-}
-
 // >3400 cycles at 170 MHz for 20 microsecond delay
 void mux_settle_delay() {
-    for (size_t i = 0; i < 3400; i++) {
+    for (volatile size_t i = 0; i < 3400; i++) {
     }
 }
 

@@ -1,6 +1,7 @@
 #include "main.h"
 #include "mux.h"
 #include <stddef.h>
+#include <stdio.h>
 
 int main(void) {
     if (!clock_init()) {
